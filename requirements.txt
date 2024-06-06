@@ -5,3 +5,4 @@ torch==2.3.0
 torchaudio==2.3.0
 torchvision==0.18.0
 python-dotenv==1.0.1
+gunicorn==22.0.0
