@@ -1,0 +1,7 @@
+Flask==3.0.3
+Flask-Cors==4.0.1
+numpy==1.26.4
+torch==2.3.0
+torchaudio==2.3.0
+torchvision==0.18.0
+python-dotenv==1.0.1
