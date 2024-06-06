@@ -7,11 +7,11 @@ import os
 load_dotenv()
 
 DEBUG = os.getenv("DEBUG") == "True"
+HOST = os.getenv("FLASK_HOST")
+PORT = os.getenv("FLASK_PORT")
 
 app = Flask(__name__)
-
-if DEBUG:
-    CORS(app)
+CORS(app, origins=["http://localhost:3000"])
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -22,4 +22,4 @@ def predict():
         return jsonify({'prediction': prediction})
 
 if __name__ == '__main__':
-    app.run(debug=DEBUG)
+    app.run(debug=DEBUG, host=HOST, port=PORT)
