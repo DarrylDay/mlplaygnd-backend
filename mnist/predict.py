@@ -9,9 +9,7 @@ import mnist.model
 device = mnist.model.device
 classes = mnist.model.classes
 
-print(os.path.getsize("models/mnist.pth"))
-
-model = mnist.model.loadModel("models/mnist.pth")
+model = mnist.model.loadModel("models/mnist.pt")
 model.eval()
 
 def get_prediction(img_bytes):

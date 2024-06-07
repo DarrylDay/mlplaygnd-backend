@@ -11,7 +11,7 @@ HOST = os.getenv("FLASK_HOST")
 PORT = os.getenv("FLASK_PORT")
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000"])
+CORS(app)
 
 @app.route('/predict', methods=['POST'])
 def predict():
