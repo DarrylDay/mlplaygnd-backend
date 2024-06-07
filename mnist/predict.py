@@ -1,3 +1,4 @@
+import os
 import io
 import torch
 import torchvision.transforms as transforms
@@ -7,6 +8,8 @@ import mnist.model
 
 device = mnist.model.device
 classes = mnist.model.classes
+
+print(os.path.getsize("models/mnist.pth"))
 
 model = mnist.model.loadModel("models/mnist.pth")
 model.eval()
