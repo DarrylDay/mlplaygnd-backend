@@ -7,3 +7,4 @@ torchvision==0.18.0
 python-dotenv==1.0.1
 gunicorn==22.0.0
 supabase==2.5.0
+requests==2.32.3

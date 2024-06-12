@@ -1,9 +1,10 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from flask import Flask, jsonify, request
-from flask_cors import CORS 
-from backend import supabase
+from flask import Flask, jsonify, request, Response
+from flask_cors import CORS
+import requests
+from backend import supabase, supabase_url
 from mnist.predict import get_prediction
 import os
 import uuid
@@ -14,6 +15,27 @@ PORT = os.getenv("FLASK_PORT")
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route('/getBucketImage', methods=['GET'])
+def bucket():
+
+    bucket = request.args.get('bucket')
+    file = request.args.get('file')
+    token = request.args.get('token')
+
+    try:
+        user = supabase.auth.get_user(token).user
+    except Exception as e:
+        print(e)
+        return "Invalid authorization token", 400
+    except:
+        return "Invalid authorization token", 400
+
+    url = f"{supabase_url}/storage/v1/object/authenticated/{bucket}/{user.id}/{file}"
+
+    resp = requests.get(url, headers={"Authorization":f"Bearer {token}"}, stream=True, allow_redirects=False)
+
+    return resp.content, resp.status_code, resp.headers.items()
 
 @app.route('/predict', methods=['POST'])
 def predict():
